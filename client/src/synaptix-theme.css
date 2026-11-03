@@ -1,0 +1,5015 @@
+/* ==========================================================================
+   RPN LUXURY HOTEL - THEME SYSTEM (DARK & LIGHT MODES)
+   Theme Variables & Universal Overrides
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  --bg-app: #0A0A12;
+  --bg-sidebar: #0D0C17;
+  --bg-navbar: #0E0D1A;
+  --bg-card: #171525;
+  --bg-card-hover: #1E1B32;
+  --bg-card-inner: #12101F;
+  --bg-input: #12101F;
+  --bg-input-border: rgba(139, 92, 246, 0.22);
+  --bg-header-pill: rgba(139, 92, 246, 0.15);
+
+  --primary: #8B5CF6;
+  --primary-hover: #7C3AED;
+  --primary-gradient: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  --accent: #C084FC;
+
+  --text-main: #F5F3FF;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
+
+  --border-subtle: rgba(139, 92, 246, 0.18);
+  --border-glow: rgba(192, 132, 252, 0.35);
+  --shadow-card: 0 10px 30px -6px rgba(0, 0, 0, 0.65);
+
+  /* Vivid Neon Icon Bubble Palette */
+  --bubble-purple-bg: rgba(139, 92, 246, 0.18);
+  --bubble-purple-icon: #C084FC;
+  --bubble-emerald-bg: rgba(52, 211, 153, 0.18);
+  --bubble-emerald-icon: #34D399;
+  --bubble-cyan-bg: rgba(56, 189, 248, 0.18);
+  --bubble-cyan-icon: #38BDF8;
+  --bubble-orange-bg: rgba(251, 146, 60, 0.18);
+  --bubble-orange-icon: #FB923C;
+
+  --table-head-bg: #110F1E;
+  --table-row-hover: #1E1A33;
+}
+
+[data-theme="light"] {
+  --bg-app: #F4F6FB;
+  --bg-sidebar: #FFFFFF;
+  --bg-navbar: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8FAFC;
+  --bg-card-inner: #F8FAFC;
+  --bg-input: #FFFFFF;
+  --bg-input-border: #CBD5E1;
+  --bg-header-pill: #EDE9FE;
+
+  --primary: #7C3AED;
+  --primary-hover: #6D28D9;
+  --primary-gradient: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+  --accent: #8B5CF6;
+
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --text-dim: #94A3B8;
+
+  --border-subtle: #E2E8F0;
+  --border-glow: rgba(124, 58, 237, 0.3);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+
+  /* Light Mode Icon Bubbles */
+  --bubble-purple-bg: #EDE9FE;
+  --bubble-purple-icon: #7C3AED;
+  --bubble-emerald-bg: #ECFDF5;
+  --bubble-emerald-icon: #059669;
+  --bubble-cyan-bg: #E0F2FE;
+  --bubble-cyan-icon: #0284C7;
+  --bubble-orange-bg: #FEF3C7;
+  --bubble-orange-icon: #D97706;
+
+  --table-head-bg: #F1F5F9;
+  --table-row-hover: #F8FAFC;
+}
+
+/* ==========================================================================
+   1. GLOBAL ANTI-INSERT & CARET SUPPRESSION
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  cursor: default;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+  cursor: text !important;
+  caret-color: var(--accent) !important;
+}
+
+button,
+a,
+[role="button"],
+select,
+.clickable,
+.synaptix-action-card,
+.synaptix-stat-card,
+.sidebar-link,
+.btn-modern-primary,
+.btn-modern-secondary,
+.btn-action-icon,
+.desk-tab-btn,
+.type-pill,
+.available-room-card,
+.food-card {
+  cursor: pointer !important;
+}
+
+/* Base Body & Layout */
+body {
+  background-color: var(--bg-app) !important;
+  color: var(--text-main) !important;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-app) !important;
+  color: var(--text-main) !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.dashboard-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-app) !important;
+  min-height: 100vh;
+}
+
+/* Subtle glow background in dark mode */
+[data-theme="dark"] .dashboard-main {
+  background-image: 
+    radial-gradient(ellipse at 85% 10%, rgba(139, 92, 246, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 90%, rgba(192, 132, 252, 0.08) 0%, transparent 50%) !important;
+}
+
+/* ==========================================================================
+   2. NAVBAR & THEME TOGGLE
+   ========================================================================== */
+.navbar-modern {
+  min-height: 76px;
+  background: var(--bg-navbar) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-card);
+}
+
+.navbar-heading-row h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+  margin: 0 !important;
+  letter-spacing: -0.01em;
+}
+
+.navbar-subtitle {
+  color: var(--text-muted) !important;
+  font-size: 13px !important;
+  margin: 2px 0 0 0 !important;
+}
+
+.navbar-subtitle strong {
+  color: var(--text-main) !important;
+}
+
+.live-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--bg-header-pill) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent) !important;
+}
+
+.navbar-actions-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Theme Switcher Button */
+.navbar-theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 9999px;
+  color: var(--text-main) !important;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-theme-toggle-btn:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--primary) !important;
+  transform: translateY(-1px);
+}
+
+.theme-icon-moon {
+  color: #C084FC !important;
+  filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.6));
+}
+
+.theme-icon-sun {
+  color: #F59E0B !important;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
+}
+
+.theme-toggle-text {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+/* System Alerts Notification Button */
+.navbar-action-btn {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted) !important;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.navbar-action-btn:hover {
+  background: var(--bg-card-hover) !important;
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.notification-bubble {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  background: #EF4444;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #EF4444;
+}
+
+/* Profile Trigger */
+.navbar-profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 9999px;
+  color: var(--text-main) !important;
+  transition: all 0.2s ease;
+}
+
+.navbar-profile-trigger:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--primary) !important;
+}
+
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 12px;
+  display: grid;
+  place-items: center;
+}
+
+.admin-display-name {
+  color: var(--text-main) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+.admin-role-badge {
+  color: var(--accent) !important;
+  font-size: 11px !important;
+}
+
+/* ==========================================================================
+   3. SIDEBAR & FULL-WIDTH SIGNOUT BUTTON
+   ========================================================================== */
+.sidebar-modern {
+  width: 260px;
+  min-height: 100vh;
+  background: var(--bg-sidebar) !important;
+  color: var(--text-main) !important;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--border-subtle) !important;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 50;
+  box-shadow: var(--shadow-card);
+}
+
+.sidebar-brand-box {
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+
+.sidebar-brand-text h2 {
+  color: var(--text-main) !important;
+}
+
+.sidebar-brand-text span {
+  color: var(--accent) !important;
+}
+
+/* Sidebar Nav Items */
+.sidebar-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 11px 16px !important;
+  border-radius: 12px !important;
+  color: var(--text-muted) !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 1px solid transparent !important;
+}
+
+.sidebar-link-icon {
+  width: 19px !important;
+  height: 19px !important;
+  color: var(--text-muted) !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+/* Hover State (Dark Mode default) */
+.sidebar-link:hover {
+  background: rgba(139, 92, 246, 0.15) !important;
+  color: #F5F3FF !important;
+  border-color: rgba(192, 132, 252, 0.25) !important;
+  transform: translateX(3px) !important;
+}
+
+.sidebar-link:hover .sidebar-link-icon {
+  color: #C084FC !important;
+}
+
+/* Active State (Both modes) */
+.sidebar-link-active,
+.sidebar-link-active:hover {
+  background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 20px -3px rgba(139, 92, 246, 0.45) !important;
+  border-color: transparent !important;
+  transform: none !important;
+}
+
+.sidebar-link-active .sidebar-link-icon,
+.sidebar-link-active:hover .sidebar-link-icon {
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   LIGHT MODE SPECIFIC SIDEBAR OVERRIDES
+   ========================================================================== */
+[data-theme="light"] .sidebar-modern {
+  background: #FFFFFF !important;
+  border-right: 1px solid #E2E8F0 !important;
+}
+
+[data-theme="light"] .sidebar-nav-section-label {
+  color: #94A3B8 !important;
+}
+
+[data-theme="light"] .sidebar-link {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .sidebar-link .sidebar-link-icon {
+  color: #64748B !important;
+}
+
+/* 🌟 When hovering in Light Mode: Vibrant high-contrast purple icon & text */
+[data-theme="light"] .sidebar-link:hover {
+  background: #EDE9FE !important;
+  color: #6D28D9 !important;
+  border-color: #DDD6FE !important;
+  transform: translateX(3px) !important;
+}
+
+[data-theme="light"] .sidebar-link:hover .sidebar-link-icon {
+  color: #7C3AED !important;
+}
+
+/* Active Link in Light Mode: Vibrant glowing purple gradient */
+[data-theme="light"] .sidebar-link-active,
+[data-theme="light"] .sidebar-link-active:hover {
+  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+  color: #FFFFFF !important;
+  border-color: transparent !important;
+  box-shadow: 0 6px 18px -2px rgba(124, 58, 237, 0.4) !important;
+}
+
+[data-theme="light"] .sidebar-link-active .sidebar-link-icon,
+[data-theme="light"] .sidebar-link-active:hover .sidebar-link-icon {
+  color: #FFFFFF !important;
+}
+
+/* Role indicator badge in Light Mode */
+[data-theme="light"] .sidebar-role-indicator.admin {
+  background: #FEF3C7 !important;
+  border: 1px solid #FDE68A !important;
+  color: #B45309 !important;
+}
+
+[data-theme="light"] .sidebar-role-indicator.room {
+  background: #EDE9FE !important;
+  border: 1px solid #DDD6FE !important;
+  color: #6D28D9 !important;
+}
+
+[data-theme="light"] .sidebar-role-indicator.food {
+  background: #FFEDD5 !important;
+  border: 1px solid #FED7AA !important;
+  color: #C2410C !important;
+}
+
+/* Admin pill & Logout button in Light Mode */
+[data-theme="light"] .sidebar-admin-pill {
+  background: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+}
+
+[data-theme="light"] .admin-snippet-name {
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .admin-snippet-role {
+  color: #7C3AED !important;
+}
+
+[data-theme="light"] .sidebar-logout-btn {
+  background: #FEE2E2 !important;
+  color: #DC2626 !important;
+  border: 1px solid #FECACA !important;
+}
+
+[data-theme="light"] .sidebar-logout-btn:hover {
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+}
+
+/* Sidebar Footer: Stacked & Full-Width Signout */
+.sidebar-footer {
+  border-top: 1px solid var(--border-subtle) !important;
+  padding-top: 16px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.sidebar-admin-pill {
+  width: 100% !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px;
+}
+
+.admin-snippet-name {
+  color: var(--text-main) !important;
+}
+
+.admin-snippet-role {
+  color: var(--accent) !important;
+}
+
+.sidebar-logout-btn {
+  width: 100% !important;
+  height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: #EF4444 !important;
+  border-radius: 12px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+}
+
+.sidebar-logout-btn span {
+  display: inline !important;
+}
+
+.sidebar-logout-btn:hover {
+  background: #EF4444 !important;
+  color: #FFFFFF !important;
+  border-color: #EF4444 !important;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   4. UNIVERSAL CARD & KPI OVERRIDE (NO MORE STARK WHITE CARDS IN DARK MODE!)
+   ========================================================================== */
+.modern-card,
+.modern-table-card,
+.modern-form-card,
+.kpi-mini-card,
+.desk-stat-card,
+.desk-card,
+.available-room-card,
+.summary-stat-card,
+.stat-card,
+.summary-card,
+.room-desk-panel,
+.food-desk-panel,
+.food-card,
+.desk-cart-card,
+.guest-intake-card,
+.rooms-catalog-panel,
+.desk-bill-preview,
+.token-modal-card,
+.modal-content {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+  box-shadow: var(--shadow-card) !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.page-title-row h1,
+.room-desk-header h1,
+.food-desk-header h1,
+.desk-card-header h3,
+.form-card-header h3 {
+  color: var(--text-main) !important;
+}
+
+.page-subtitle,
+.desk-desc,
+.desk-card-header p,
+.form-card-header p {
+  color: var(--text-muted) !important;
+}
+
+.page-title-icon {
+  color: var(--accent) !important;
+}
+
+/* ==========================================================================
+   5. ICON BUBBLES WITH VIVID, CONTRASTING NEON COLORS
+   ========================================================================== */
+.kpi-mini-icon,
+.stat-icon-wrapper {
+  border-radius: 14px !important;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.kpi-mini-icon.purple,
+.stat-icon-wrapper.total,
+.stat-icon-wrapper.purple {
+  background: var(--bubble-purple-bg) !important;
+  color: var(--bubble-purple-icon) !important;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.kpi-mini-icon.emerald,
+.stat-icon-wrapper.available,
+.stat-icon-wrapper.emerald {
+  background: var(--bubble-emerald-bg) !important;
+  color: var(--bubble-emerald-icon) !important;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.kpi-mini-icon.cyan,
+.stat-icon-wrapper.cyan {
+  background: var(--bubble-cyan-bg) !important;
+  color: var(--bubble-cyan-icon) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.kpi-mini-icon.orange,
+.stat-icon-wrapper.occupied,
+.stat-icon-wrapper.orange {
+  background: var(--bubble-orange-bg) !important;
+  color: var(--bubble-orange-icon) !important;
+  border: 1px solid rgba(251, 146, 60, 0.25);
+}
+
+.kpi-mini-title,
+.stat-label {
+  color: var(--text-muted) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+}
+
+.kpi-mini-value,
+.stat-number {
+  color: var(--text-main) !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+}
+
+.kpi-mini-value.emerald {
+  color: var(--bubble-emerald-icon) !important;
+}
+
+.kpi-mini-value.cyan {
+  color: var(--bubble-cyan-icon) !important;
+}
+
+.kpi-mini-value.orange {
+  color: var(--bubble-orange-icon) !important;
+}
+
+.stat-hint {
+  color: var(--text-dim) !important;
+}
+
+/* ==========================================================================
+   6. ROOM DESK SPACIOUS & LUXURY OVERHAUL
+   ========================================================================== */
+.room-desk-container,
+.food-desk-container,
+.modern-page-container {
+  padding: 28px 36px 48px 36px !important;
+  max-width: 1620px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+.desk-stats-grid,
+.modern-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  gap: 20px !important;
+  margin-bottom: 24px;
+}
+
+/* Tabs Bar */
+.desk-tabs-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.desk-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 9999px;
+  color: var(--text-muted) !important;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.desk-tab-btn:hover {
+  color: var(--text-main) !important;
+  border-color: var(--primary) !important;
+  background: var(--bg-card-hover) !important;
+}
+
+.desk-tab-btn.active {
+  background: var(--primary-gradient) !important;
+  border-color: transparent !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.45) !important;
+}
+
+/* Room Booking Two-Column Spacious Layout */
+.room-booking-layout {
+  display: grid !important;
+  grid-template-columns: 1.25fr 0.85fr !important;
+  gap: 28px !important;
+  align-items: start !important;
+}
+
+@media (max-width: 1180px) {
+  .room-booking-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.desk-left-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.desk-right-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 96px;
+}
+
+/* Filter Pills */
+.room-type-filter-pills,
+.food-category-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0 18px 0;
+}
+
+.type-pill {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-muted) !important;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.type-pill:hover {
+  color: var(--text-main) !important;
+  border-color: var(--primary) !important;
+}
+
+.type-pill.active {
+  background: var(--primary) !important;
+  color: #FFFFFF !important;
+  border-color: var(--primary) !important;
+  font-weight: 700;
+}
+
+/* Available Rooms Grid */
+.available-rooms-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+  gap: 14px !important;
+  max-height: 540px !important;
+  overflow-y: auto !important;
+  padding-right: 6px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.available-room-card {
+  padding: 20px !important;
+  border-radius: 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+}
+
+.available-room-card:hover {
+  border-color: var(--primary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(139, 92, 246, 0.25) !important;
+}
+
+.available-room-card.selected {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px var(--primary), 0 10px 30px rgba(139, 92, 246, 0.35) !important;
+}
+
+.room-badge-num {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+}
+
+.room-type-tag {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 9999px !important;
+  background: var(--bg-header-pill) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.room-price-display .amount {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+}
+
+.room-price-display .currency {
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+}
+
+.room-cap-info {
+  color: var(--text-muted) !important;
+  font-size: 11.5px !important;
+}
+
+.room-select-btn {
+  width: 100% !important;
+  padding: 8px 14px !important;
+  border-radius: 10px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+  transition: all 0.2s ease !important;
+}
+
+.room-select-btn.selected {
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+/* Guest Intake Form & Booking Dates Grid */
+.guest-form-grid,
+.dates-form-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 14px !important;
+  margin-top: 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 640px) {
+  .guest-form-grid,
+  .dates-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+}
+
+.desk-input-field label {
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: var(--text-muted) !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+}
+
+.input-wrap,
+.guest-lookup-bar,
+.food-search-bar,
+.toolbar-search {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: var(--bg-input) !important;
+  border: 1px solid var(--bg-input-border) !important;
+  border-radius: 12px !important;
+  padding: 0 14px !important;
+  height: 44px !important;
+  transition: all 0.2s ease;
+}
+
+.input-wrap:focus-within,
+.guest-lookup-bar:focus-within,
+.food-search-bar:focus-within,
+.toolbar-search:focus-within {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.3) !important;
+}
+
+.input-wrap input,
+.guest-lookup-bar input,
+.food-search-bar input,
+.toolbar-search input,
+select {
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-main) !important;
+  width: 100% !important;
+  font-size: 13.5px !important;
+  outline: none !important;
+}
+
+/* ==========================================================================
+   7. FOOD DESK SPATIOUS OVERHAUL
+   ========================================================================== */
+.food-desk-main-layout {
+  display: grid !important;
+  grid-template-columns: 1.3fr 0.85fr !important;
+  gap: 28px !important;
+  align-items: start !important;
+}
+
+@media (max-width: 1180px) {
+  .food-desk-main-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.food-items-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)) !important;
+  gap: 18px !important;
+}
+
+.food-card {
+  padding: 18px !important;
+  border-radius: 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+/* ==========================================================================
+   8. MODERN TABLES, CONTACT PILLS & BADGES
+   ========================================================================== */
+.modern-table-card {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.modern-table,
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--text-main) !important;
+}
+
+.modern-table thead th,
+.table thead th {
+  background: var(--table-head-bg) !important;
+  color: var(--accent) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+  padding: 16px 20px !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+
+.modern-table tbody td,
+.table tbody td {
+  padding: 16px 20px !important;
+  background: var(--bg-card) !important;
+  color: var(--text-main) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  font-size: 13px !important;
+  transition: background-color 0.15s ease;
+}
+
+.modern-table tbody tr:hover td,
+.table tbody tr:hover td {
+  background: var(--table-row-hover) !important;
+}
+
+/* Contact Pills in Table */
+.customer-contact-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 5px 12px !important;
+  border-radius: 8px !important;
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+  font-size: 12px !important;
+}
+
+.customer-contact-icon {
+  color: var(--accent) !important;
+  width: 14px;
+  height: 14px;
+}
+
+/* Portal Role Badge */
+.role-tag-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.role-tag-badge.room {
+  background: var(--bubble-cyan-bg) !important;
+  color: var(--bubble-cyan-icon) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+}
+
+.role-tag-badge.food {
+  background: var(--bubble-orange-bg) !important;
+  color: var(--bubble-orange-icon) !important;
+  border: 1px solid rgba(251, 146, 60, 0.3) !important;
+}
+
+.role-tag-badge.admin {
+  background: var(--bubble-purple-bg) !important;
+  color: var(--bubble-purple-icon) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+}
+
+.role-tag-badge.none {
+  background: var(--bg-card-inner) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+/* Action Buttons */
+.btn-action-icon {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 8px !important;
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-muted) !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  transition: all 0.2s ease;
+}
+
+.btn-action-icon:hover {
+  background: var(--bg-card-hover) !important;
+  color: var(--accent) !important;
+  border-color: var(--primary) !important;
+}
+
+.btn-action-icon.delete:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #EF4444 !important;
+  border-color: #EF4444 !important;
+}
+
+/* Primary Action Buttons */
+.btn-modern-primary,
+.btn-gold,
+.btn-issue-token,
+.btn-submit-order {
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  padding: 10px 22px !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  font-size: 13.5px !important;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.4) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-modern-primary:hover,
+.btn-gold:hover,
+.btn-issue-token:hover,
+.btn-submit-order:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.6) !important;
+}
+
+.btn-modern-secondary {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--accent) !important;
+  padding: 10px 20px !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+  transition: all 0.2s ease;
+}
+
+.btn-modern-secondary:hover {
+  background: var(--bg-card-hover) !important;
+  color: var(--text-main) !important;
+  border-color: var(--primary) !important;
+}
+
+/* ==========================================================================
+   9. DESK TERMINALS, PRICING SUMMARIES & CART TRAY
+   ========================================================================== */
+.desk-summary-box,
+.cart-total-box,
+.order-cost-breakdown {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px !important;
+  padding: 16px 18px !important;
+  margin: 18px 0 !important;
+  color: var(--text-main) !important;
+}
+
+.summary-row,
+.cost-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 13px !important;
+  color: var(--text-muted) !important;
+  margin-bottom: 8px !important;
+}
+
+.summary-row strong,
+.cost-row strong {
+  color: var(--text-main) !important;
+}
+
+.summary-divider {
+  height: 1px !important;
+  background: var(--border-subtle) !important;
+  margin: 12px 0 !important;
+}
+
+.summary-total-row,
+.cost-total-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+  padding-top: 4px !important;
+}
+
+.total-gold-price,
+.grand-total-amount {
+  color: var(--accent) !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.desk-submit-btn,
+.btn-bill-settle {
+  width: 100% !important;
+  height: 48px !important;
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.45) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+}
+
+.desk-submit-btn:hover:not(:disabled),
+.btn-bill-settle:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 26px rgba(139, 92, 246, 0.6) !important;
+}
+
+.desk-submit-btn:disabled,
+.btn-bill-settle:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+.gold-pill {
+  display: inline-block !important;
+  padding: 3px 10px !important;
+  border-radius: 9999px !important;
+  background: var(--bg-header-pill) !important;
+  color: var(--accent) !important;
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.cart-items-list {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px !important;
+  padding: 12px !important;
+}
+
+.cart-item-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 8px !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+}
+
+.cart-item-row:last-child {
+  border-bottom: none !important;
+}
+
+.food-qty-counter {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 8px !important;
+  padding: 2px 6px !important;
+}
+
+.food-qty-counter button {
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-main) !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: grid !important;
+  place-items: center !important;
+  font-weight: 700 !important;
+}
+
+.food-qty-counter span {
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+  min-width: 18px !important;
+  text-align: center !important;
+}
+
+.guest-results-dropdown {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-card) !important;
+  margin-top: 6px !important;
+  overflow: hidden !important;
+}
+
+.guest-result-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 14px !important;
+  color: var(--text-main) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  transition: background 0.15s ease !important;
+}
+
+.guest-result-item:hover {
+  background: var(--bg-card-hover) !important;
+}
+
+.guest-result-item strong {
+  color: var(--text-main) !important;
+}
+
+.guest-result-item span {
+  color: var(--text-muted) !important;
+}
+
+.selected-customer-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  background: var(--bg-header-pill) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--accent) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  margin-top: 12px !important;
+}
+
+.selected-customer-pill button {
+  background: transparent !important;
+  border: none !important;
+  color: #EF4444 !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  cursor: pointer !important;
+}
+
+/* ==========================================================================
+   10. EXECUTIVE DASHBOARD (SYNAPTIX FUTURISTIC 3D THEME)
+   ========================================================================== */
+
+.synaptix-dashboard-root {
+  padding: 28px 36px 48px 36px !important;
+  max-width: 1540px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+}
+
+/* Header & AI Status Bar */
+.synaptix-top-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 20px !important;
+}
+
+.synaptix-brand-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--accent) !important;
+  margin-bottom: 6px !important;
+  text-transform: uppercase !important;
+}
+
+.synaptix-welcome-text h1 {
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 0 4px 0 !important;
+}
+
+.synaptix-welcome-text p {
+  font-size: 13.5px !important;
+  color: var(--text-muted) !important;
+  margin: 0 !important;
+}
+
+.synaptix-actions-bar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+}
+
+.ai-active-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 16px !important;
+  background: var(--bg-header-pill) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 9999px !important;
+  color: var(--accent) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.pulse-dot-purple {
+  width: 7px !important;
+  height: 7px !important;
+  background: var(--accent) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 8px var(--accent) !important;
+  animation: pulse-ring 2s infinite ease-in-out !important;
+}
+
+.synaptix-ghost-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 16px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 9999px !important;
+  color: var(--text-main) !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.synaptix-ghost-pill:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--primary) !important;
+  transform: translateY(-1px) !important;
+}
+
+.synaptix-tab-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 18px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 9999px !important;
+  color: var(--text-muted) !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.synaptix-tab-pill:hover {
+  color: var(--text-main) !important;
+  border-color: var(--primary) !important;
+}
+
+.synaptix-tab-pill.active {
+  background: var(--primary-gradient) !important;
+  border-color: transparent !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 20px -3px rgba(139, 92, 246, 0.5) !important;
+}
+
+/* 4 KPI Grid Cards */
+.synaptix-kpi-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 18px !important;
+}
+
+@media (max-width: 1100px) {
+  .synaptix-kpi-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .synaptix-kpi-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.synaptix-stat-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 16px !important;
+  padding: 14px 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.synaptix-stat-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 10px 24px -6px rgba(139, 92, 246, 0.22) !important;
+}
+
+.card-top-spark {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 8px !important;
+}
+
+.stat-symbol {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+  display: grid !important;
+  place-items: center !important;
+}
+
+.stat-symbol.purple {
+  background: var(--bubble-purple-bg) !important;
+  color: var(--bubble-purple-icon) !important;
+  border: 1px solid rgba(139, 92, 246, 0.25) !important;
+}
+
+.stat-symbol.cyan {
+  background: var(--bubble-cyan-bg) !important;
+  color: var(--bubble-cyan-icon) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+}
+
+.stat-symbol.orange {
+  background: var(--bubble-orange-bg) !important;
+  color: var(--bubble-orange-icon) !important;
+  border: 1px solid rgba(251, 146, 60, 0.25) !important;
+}
+
+.stat-symbol.emerald {
+  background: var(--bubble-emerald-bg) !important;
+  color: var(--bubble-emerald-icon) !important;
+  border: 1px solid rgba(52, 211, 153, 0.25) !important;
+}
+
+.sparkline-mini {
+  width: 80px !important;
+  height: 28px !important;
+  max-width: 80px !important;
+  max-height: 28px !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+
+.sparkline-mini svg {
+  width: 80px !important;
+  height: 28px !important;
+  max-width: 80px !important;
+  max-height: 28px !important;
+  display: block !important;
+}
+
+.stat-caption {
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  color: var(--text-muted) !important;
+  margin-bottom: 4px !important;
+  text-transform: uppercase !important;
+}
+
+.stat-main-number {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 4px !important;
+}
+
+.stat-growth-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: var(--accent) !important;
+}
+
+.stat-growth-tag.positive {
+  color: var(--bubble-emerald-icon) !important;
+}
+
+/* Main Charts Row */
+.synaptix-charts-row {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr !important;
+  gap: 20px !important;
+}
+
+@media (max-width: 992px) {
+  .synaptix-charts-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.synaptix-main-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 20px !important;
+  padding: 24px !important;
+  box-shadow: var(--shadow-card) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.card-header-clean {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  margin-bottom: 18px !important;
+  flex-wrap: wrap !important;
+  gap: 14px !important;
+}
+
+.card-pretitle {
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--accent) !important;
+  display: block !important;
+  margin-bottom: 4px !important;
+  text-transform: uppercase !important;
+}
+
+.card-title-light {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+  margin: 0 !important;
+}
+
+.card-desc-muted {
+  font-size: 12.5px !important;
+  color: var(--text-muted) !important;
+  margin-top: 4px !important;
+}
+
+.card-big-value {
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+.badge-purple-pill {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 12px !important;
+  border-radius: 9999px !important;
+  background: var(--bg-header-pill) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--accent) !important;
+}
+
+.chart-legend-pills {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.legend-dot-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--text-muted) !important;
+  padding: 5px 12px !important;
+  background: var(--bg-card-inner) !important;
+  border-radius: 9999px !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.dot {
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+}
+
+.dot.room,
+.dot.purple {
+  background: #8B5CF6 !important;
+  box-shadow: 0 0 8px #8B5CF6 !important;
+}
+
+.dot.food,
+.dot.pink {
+  background: #F472B6 !important;
+  box-shadow: 0 0 8px #F472B6 !important;
+}
+
+.dot.cyan {
+  background: #38BDF8 !important;
+  box-shadow: 0 0 8px #38BDF8 !important;
+}
+
+.dot.orange {
+  background: #FB923C !important;
+  box-shadow: 0 0 8px #FB923C !important;
+}
+
+.dot.emerald {
+  background: #34D399 !important;
+  box-shadow: 0 0 8px #34D399 !important;
+}
+
+.chart-wrapper-synaptix {
+  margin-top: 8px !important;
+}
+
+/* Arc Gauge Styles */
+.arc-gauge-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.gauge-arc-visual {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  height: 180px !important;
+  margin: 0 auto !important;
+}
+
+.gauge-center-stat {
+  position: absolute !important;
+  bottom: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.gauge-center-stat .score-val {
+  font-size: 38px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+  line-height: 1 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.gauge-center-stat .score-label {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  color: var(--text-muted) !important;
+  margin-top: 4px !important;
+  text-transform: uppercase !important;
+}
+
+.gauge-metrics-row {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 12px !important;
+  width: 100% !important;
+  margin-top: 20px !important;
+  padding-top: 18px !important;
+  border-top: 1px solid var(--border-subtle) !important;
+}
+
+.gauge-metric-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 12px !important;
+  color: var(--text-muted) !important;
+}
+
+.gauge-metric-item strong {
+  margin-left: auto !important;
+  color: var(--text-main) !important;
+  font-weight: 700 !important;
+}
+
+/* Bottom 4 Navigation Modules */
+.synaptix-modules-row {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 16px !important;
+}
+
+@media (max-width: 1100px) {
+  .synaptix-modules-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .synaptix-modules-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.synaptix-action-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 18px !important;
+  padding: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  cursor: pointer !important;
+  transition: all 0.22s ease !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.synaptix-action-card:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--primary) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 30px -6px rgba(139, 92, 246, 0.25) !important;
+}
+
+.action-card-icon {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 12px !important;
+  display: grid !important;
+  place-items: center !important;
+  flex-shrink: 0 !important;
+}
+
+.action-card-icon.purple {
+  background: var(--bubble-purple-bg) !important;
+  color: var(--bubble-purple-icon) !important;
+  border: 1px solid rgba(139, 92, 246, 0.25) !important;
+}
+
+.action-card-icon.orange {
+  background: var(--bubble-orange-bg) !important;
+  color: var(--bubble-orange-icon) !important;
+  border: 1px solid rgba(251, 146, 60, 0.25) !important;
+}
+
+.action-card-icon.cyan {
+  background: var(--bubble-cyan-bg) !important;
+  color: var(--bubble-cyan-icon) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+}
+
+.action-card-icon.emerald {
+  background: var(--bubble-emerald-bg) !important;
+  color: var(--bubble-emerald-icon) !important;
+  border: 1px solid rgba(52, 211, 153, 0.25) !important;
+}
+
+.action-card-text h4 {
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+  margin: 0 0 2px 0 !important;
+}
+
+.action-card-text p {
+  font-size: 11.5px !important;
+  color: var(--text-muted) !important;
+  margin: 0 !important;
+  line-height: 1.35 !important;
+}
+
+/* Synaptix Data Table & Stay History */
+.synaptix-data-table {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin-top: 12px !important;
+}
+
+.synaptix-data-table th {
+  background: var(--table-head-bg) !important;
+  color: var(--accent) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 14px 18px !important;
+  text-align: left !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+
+.synaptix-data-table th:first-child {
+  border-top-left-radius: 12px !important;
+}
+
+.synaptix-data-table th:last-child {
+  border-top-right-radius: 12px !important;
+}
+
+.synaptix-data-table td {
+  padding: 16px 18px !important;
+  color: var(--text-main) !important;
+  font-size: 13px !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  background: var(--bg-card) !important;
+  transition: background 0.15s ease !important;
+}
+
+.synaptix-data-table tr:hover td {
+  background: var(--table-row-hover) !important;
+}
+
+.token-hash-pill {
+  display: inline-block !important;
+  padding: 4px 10px !important;
+  border-radius: 8px !important;
+  font-family: monospace !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+  background: var(--bg-header-pill) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.checkout-badge-done {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 4px 10px !important;
+  border-radius: 9999px !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: var(--bubble-emerald-icon) !important;
+  background: var(--bubble-emerald-bg) !important;
+  border: 1px solid rgba(52, 211, 153, 0.3) !important;
+}
+
+.table-amount-purple {
+  font-weight: 800 !important;
+  font-size: 14px !important;
+  color: var(--accent) !important;
+}
+
+.empty-history-box {
+  padding: 60px 24px !important;
+  text-align: center !important;
+}
+
+.empty-history-box h4 {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+  margin: 0 0 6px 0 !important;
+}
+
+.empty-history-box p {
+  font-size: 13px !important;
+  color: var(--text-muted) !important;
+  max-width: 440px !important;
+  margin: 0 auto !important;
+}
+
+/* ==========================================================================
+   11. SYNAPTIX ROSTER & DIRECTORY CONTROLS (STAFF & CUSTOMERS)
+   ========================================================================== */
+
+.synaptix-toolbar-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 18px !important;
+  padding: 14px 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+  box-shadow: var(--shadow-card) !important;
+  margin-bottom: 24px !important;
+}
+
+[data-theme="light"] .synaptix-toolbar-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #CBD5E1 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Rooms Catalog: Compact 3-Column Filter Toolbar */
+.rooms-catalog-toolbar {
+  display: grid !important;
+  grid-template-columns: 1.5fr 1fr 1fr !important;
+  gap: 12px !important;
+  padding: 10px 16px !important;
+  border-radius: 14px !important;
+  align-items: center !important;
+  margin-bottom: 18px !important;
+}
+
+@media (max-width: 860px) {
+  .rooms-catalog-toolbar {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.rooms-catalog-toolbar .synaptix-search-input-wrap {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 40px !important;
+  margin: 0 !important;
+}
+
+.rooms-catalog-toolbar select.synaptix-select,
+.rooms-catalog-toolbar .synaptix-select {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 40px !important;
+  padding: 8px 14px !important;
+  font-size: 12.5px !important;
+  margin: 0 !important;
+}
+
+.synaptix-search-input-wrap,
+.synaptix-search-box {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  background: var(--bg-card-inner) !important;
+  border: 1.5px solid var(--border-subtle) !important;
+  border-radius: 9999px !important;
+  padding: 0 18px !important;
+  height: 46px !important;
+  flex: 1 !important;
+  min-width: 260px !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-theme="light"] .synaptix-search-input-wrap,
+[data-theme="light"] .synaptix-search-box {
+  background: #F8FAFC !important;
+  border: 1.5px solid #CBD5E1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="dark"] .synaptix-search-input-wrap,
+[data-theme="dark"] .synaptix-search-box {
+  background: #12101F !important;
+  border: 1.5px solid rgba(139, 92, 246, 0.3) !important;
+}
+
+.synaptix-search-input-wrap:focus-within,
+.synaptix-search-box:focus-within {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25) !important;
+}
+
+[data-theme="light"] .synaptix-search-input-wrap:focus-within,
+[data-theme="light"] .synaptix-search-box:focus-within {
+  background: #FFFFFF !important;
+  border-color: #7C3AED !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2) !important;
+}
+
+.synaptix-search-input-wrap input,
+.synaptix-search-box input {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: var(--text-main) !important;
+  width: 100% !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+}
+
+[data-theme="light"] .synaptix-search-input-wrap input,
+[data-theme="light"] .synaptix-search-box input {
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .synaptix-search-input-wrap input::placeholder,
+[data-theme="light"] .synaptix-search-box input::placeholder {
+  color: #64748B !important;
+}
+
+.synaptix-search-input-wrap .search-icon,
+.synaptix-search-box .search-icon {
+  color: var(--primary) !important;
+  flex-shrink: 0 !important;
+  width: 17px !important;
+  height: 17px !important;
+}
+
+.synaptix-search-input-wrap .search-clear-btn,
+.synaptix-search-box .search-clear-btn {
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-muted) !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  padding: 0 4px !important;
+  transition: color 0.15s ease !important;
+}
+
+.synaptix-search-input-wrap .search-clear-btn:hover,
+.synaptix-search-box .search-clear-btn:hover {
+  color: #EF4444 !important;
+}
+
+.synaptix-filter-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+select.synaptix-select,
+.synaptix-select {
+  border: 1.5px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  padding: 10px 18px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  outline: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  height: 46px !important;
+  background: var(--bg-card-inner) !important;
+  color: var(--text-main) !important;
+  min-width: 140px !important;
+}
+
+[data-theme="light"] select.synaptix-select,
+[data-theme="light"] .synaptix-select {
+  background: #FFFFFF !important;
+  border: 1.5px solid #CBD5E1 !important;
+  color: #0F172A !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="dark"] select.synaptix-select,
+[data-theme="dark"] .synaptix-select {
+  background: #171525 !important;
+  border: 1.5px solid rgba(139, 92, 246, 0.3) !important;
+  color: #F5F3FF !important;
+}
+
+select.synaptix-select:hover,
+.synaptix-select:hover {
+  border-color: var(--primary) !important;
+}
+
+[data-theme="light"] select.synaptix-select:hover,
+[data-theme="light"] .synaptix-select:hover {
+  border-color: #7C3AED !important;
+  background: #F8FAFC !important;
+}
+
+select.synaptix-select:focus,
+.synaptix-select:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25) !important;
+}
+
+[data-theme="light"] select.synaptix-select:focus,
+[data-theme="light"] .synaptix-select:focus {
+  border-color: #7C3AED !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2) !important;
+}
+
+[data-theme="light"] select.synaptix-select option {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+[data-theme="dark"] select.synaptix-select option {
+  background: #171525 !important;
+  color: #F5F3FF !important;
+}
+
+[data-theme="light"] .food-search-bar,
+[data-theme="light"] .guest-lookup-bar {
+  background: #FFFFFF !important;
+  border: 1.5px solid #CBD5E1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .food-search-bar input,
+[data-theme="light"] .guest-lookup-bar input {
+  color: #0F172A !important;
+}
+
+.contact-pill-synaptix {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 6px 12px !important;
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 8px !important;
+  color: var(--text-main) !important;
+  font-size: 12px !important;
+  font-family: monospace, sans-serif !important;
+  transition: all 0.15s ease !important;
+}
+
+.contact-pill-synaptix:hover {
+  border-color: var(--primary) !important;
+  background: var(--bg-card-hover) !important;
+}
+
+.status-badge-inactive {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 4px 10px !important;
+  border-radius: 9999px !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: var(--bubble-orange-icon) !important;
+  background: var(--bubble-orange-bg) !important;
+  border: 1px solid rgba(251, 146, 60, 0.3) !important;
+}
+
+.synaptix-form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 16px !important;
+  margin-top: 16px !important;
+}
+
+@media (max-width: 768px) {
+  .synaptix-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.synaptix-form-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+.synaptix-form-field.full-width {
+  grid-column: 1 / -1 !important;
+}
+
+.synaptix-form-field label {
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: var(--text-muted) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.synaptix-form-field .input-wrap {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  height: 46px !important;
+  padding: 0 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  transition: all 0.2s ease !important;
+}
+
+.synaptix-form-field .input-wrap:focus-within {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.3) !important;
+}
+
+.synaptix-form-field .input-wrap input,
+.synaptix-form-field .input-wrap select {
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-main) !important;
+  width: 100% !important;
+  font-size: 13.5px !important;
+  outline: none !important;
+}
+
+.synaptix-form-actions {
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  margin-top: 20px !important;
+  grid-column: 1 / -1 !important;
+}
+
+/* Payment Mode & Status Badges */
+.payment-mode-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 4px 10px !important;
+  border-radius: 9999px !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.status-badge-pending {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 4px 10px !important;
+  border-radius: 9999px !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: var(--bubble-orange-icon) !important;
+  background: var(--bubble-orange-bg) !important;
+  border: 1px solid rgba(251, 146, 60, 0.3) !important;
+}
+
+/* ==========================================================================
+   ROOM DESK & FOOD DESK: UNIFIED SYNAPTIX AI THEME OVERHAUL
+   (Zero White Backgrounds in Dark Mode)
+   ========================================================================== */
+
+/* Room Desk Room Cards */
+.room-card-modern {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px !important;
+  padding: 12px 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  box-shadow: var(--shadow-card) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.room-card-modern:hover {
+  border-color: var(--primary) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.22) !important;
+}
+
+.room-card-modern.selected {
+  border: 2px solid var(--accent) !important;
+  box-shadow: 0 0 0 2px var(--accent), 0 8px 24px rgba(139, 92, 246, 0.35) !important;
+  background: rgba(139, 92, 246, 0.1) !important;
+}
+
+.room-card-modern.status-occupied {
+  cursor: default !important;
+  opacity: 0.92;
+}
+
+.room-card-modern.status-maintenance {
+  cursor: default !important;
+  opacity: 0.8;
+}
+
+.room-selected-badge {
+  position: absolute !important;
+  top: -8px !important;
+  right: 10px !important;
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  font-size: 9.5px !important;
+  font-weight: 800 !important;
+  padding: 2px 8px !important;
+  border-radius: 9999px !important;
+  letter-spacing: 0.04em !important;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.5) !important;
+  z-index: 2 !important;
+}
+
+.room-card-top-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  width: 100% !important;
+}
+
+.room-card-top-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.room-number-pill {
+  font-size: 14.5px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+}
+
+.room-type-chip {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 2px 8px !important;
+  border-radius: 9999px !important;
+  background: var(--bg-header-pill) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.room-status-indicator {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 2px 8px !important;
+  border-radius: 9999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.room-status-indicator.available {
+  background: rgba(52, 211, 153, 0.15) !important;
+  color: #34D399 !important;
+  border: 1px solid rgba(52, 211, 153, 0.3) !important;
+}
+
+.room-status-indicator.occupied {
+  background: rgba(192, 132, 252, 0.18) !important;
+  color: #C084FC !important;
+  border: 1px solid rgba(192, 132, 252, 0.35) !important;
+}
+
+.room-status-indicator.maintenance {
+  background: rgba(251, 146, 60, 0.15) !important;
+  color: #FB923C !important;
+  border: 1px solid rgba(251, 146, 60, 0.3) !important;
+}
+
+.status-indicator-dot {
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: currentColor !important;
+}
+
+.room-card-middle-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin: 2px 0 !important;
+}
+
+.room-price-box {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 3px !important;
+}
+
+.room-price-currency {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+}
+
+.room-price-amount {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+}
+
+.room-price-unit {
+  font-size: 11px !important;
+  color: var(--text-muted) !important;
+}
+
+.amenity-chip {
+  font-size: 10px !important;
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
+  background: var(--bg-card) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border-subtle) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.room-occupied-snippet {
+  padding: 6px 8px !important;
+  border-radius: 6px !important;
+  background: rgba(139, 92, 246, 0.1) !important;
+  border: 1px dashed rgba(139, 92, 246, 0.25) !important;
+  font-size: 10.5px !important;
+  color: var(--text-main) !important;
+}
+
+.btn-room-select {
+  width: 100% !important;
+  padding: 8px 12px !important;
+  border-radius: 9px !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+}
+
+.btn-room-select:hover {
+  border-color: var(--primary) !important;
+  color: var(--accent) !important;
+}
+
+.btn-room-select.selected {
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4) !important;
+}
+
+.btn-room-disabled {
+  width: 100% !important;
+  padding: 8px 12px !important;
+  border-radius: 9px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  background: var(--bg-card-inner) !important;
+  cursor: not-allowed !important;
+  box-sizing: border-box !important;
+}
+
+.btn-room-disabled.occupied {
+  border: 1px dashed rgba(192, 132, 252, 0.3) !important;
+  color: var(--accent) !important;
+}
+
+.btn-room-disabled.maintenance {
+  border: 1px dashed rgba(251, 146, 60, 0.3) !important;
+  color: #FB923C !important;
+}
+
+/* ==========================================================================
+   FOOD DESK: ULTRA-MODERN DISH CARDS & TRAY
+   ========================================================================== */
+.available-foods-grid-modern {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+  gap: 18px !important;
+  max-height: 640px !important;
+  overflow-y: auto !important;
+  padding-right: 6px !important;
+}
+
+/* ==========================================================================
+   FOOD DESK: ULTRA-MODERN DISH CARDS & ORDER TRAY
+   ========================================================================== */
+.available-foods-grid-modern {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+  gap: 16px !important;
+  max-height: 640px !important;
+  overflow-y: auto !important;
+  padding-right: 6px !important;
+}
+
+/* Individual Dish Card */
+.dish-card-modern {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 18px !important;
+  padding: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: relative !important;
+  box-shadow: var(--shadow-card) !important;
+  box-sizing: border-box !important;
+  min-height: 190px !important;
+}
+
+.dish-card-modern:hover {
+  border-color: var(--primary) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 24px rgba(139, 92, 246, 0.22) !important;
+}
+
+/* Card Header: Category Badge (Left) & Bold Price Tag (Right) */
+.dish-card-header-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.dish-category-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 9999px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  flex-shrink: 0 !important;
+}
+
+.dish-category-chip.breakfast {
+  background: var(--bubble-orange-bg) !important;
+  color: var(--bubble-orange-icon) !important;
+  border: 1px solid rgba(251, 146, 60, 0.3) !important;
+}
+
+.dish-category-chip.lunch {
+  background: var(--bubble-emerald-bg) !important;
+  color: var(--bubble-emerald-icon) !important;
+  border: 1px solid rgba(52, 211, 153, 0.3) !important;
+}
+
+.dish-category-chip.dinner {
+  background: var(--bubble-purple-bg) !important;
+  color: var(--bubble-purple-icon) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+}
+
+.dish-category-chip.snacks {
+  background: rgba(236, 72, 153, 0.15) !important;
+  color: #F472B6 !important;
+  border: 1px solid rgba(236, 72, 153, 0.3) !important;
+}
+
+.dish-category-chip.beverages {
+  background: var(--bubble-cyan-bg) !important;
+  color: var(--bubble-cyan-icon) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+}
+
+/* Luxury High-Contrast Price Badge */
+.dish-price-tag {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 2px !important;
+  padding: 4px 10px !important;
+  border-radius: 10px !important;
+  background: rgba(139, 92, 246, 0.15) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+  color: var(--accent) !important;
+  font-weight: 800 !important;
+  flex-shrink: 0 !important;
+}
+
+[data-theme="light"] .dish-price-tag {
+  background: #EDE9FE !important;
+  color: #6D28D9 !important;
+  border-color: #DDD6FE !important;
+}
+
+.dish-price-currency {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.dish-price-number {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  font-family: monospace, sans-serif !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Card Body Content */
+.dish-body-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  flex: 1 !important;
+}
+
+.dish-card-title {
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+  margin: 0 !important;
+  line-height: 1.35 !important;
+}
+
+.dish-card-desc {
+  font-size: 12px !important;
+  color: var(--text-muted) !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Card Footer Action Area */
+.dish-card-footer {
+  margin-top: auto !important;
+  padding-top: 6px !important;
+  width: 100% !important;
+}
+
+/* High-Contrast Full-Width Add Button */
+.btn-dish-add-modern {
+  width: 100% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 10px 14px !important;
+  border-radius: 12px !important;
+  background: var(--primary-gradient) !important;
+  border: none !important;
+  color: #FFFFFF !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35) !important;
+  box-sizing: border-box !important;
+}
+
+.btn-dish-add-modern:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.5) !important;
+}
+
+.btn-dish-add-modern:active {
+  transform: scale(0.98) !important;
+}
+
+/* Full-Width Quantity Stepper in Food Card */
+.dish-qty-stepper-modern {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 4px 6px !important;
+  border-radius: 12px !important;
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35) !important;
+  box-sizing: border-box !important;
+}
+
+.dish-stepper-btn {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: none !important;
+  color: #FFFFFF !important;
+  display: grid !important;
+  place-items: center !important;
+  cursor: pointer !important;
+  transition: background 0.15s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.dish-stepper-btn:hover {
+  background: rgba(255, 255, 255, 0.38) !important;
+}
+
+.dish-stepper-display {
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  font-family: monospace, sans-serif !important;
+}
+
+/* Destination Selector */
+.dest-toggle-group-modern {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.dest-btn-modern {
+  padding: 9px 8px !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--border-subtle) !important;
+  background: var(--bg-card-inner) !important;
+  color: var(--text-muted) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.dest-btn-modern:hover {
+  color: var(--text-main) !important;
+  border-color: var(--primary) !important;
+}
+
+.dest-btn-modern.active {
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  border-color: transparent !important;
+  font-weight: 700 !important;
+  box-shadow: 0 3px 12px rgba(139, 92, 246, 0.35) !important;
+}
+
+/* Order Tray Box */
+.order-tray-scroll {
+  max-height: 280px !important;
+  overflow-y: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  margin-bottom: 16px !important;
+  padding-right: 4px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 2-Tier Responsive Cart Item Card */
+.cart-item-row-modern {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  padding: 12px 14px !important;
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px !important;
+  transition: all 0.15s ease !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.cart-item-tier-top {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.cart-item-name-block {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.cart-item-name-text {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.cart-item-unit-rate {
+  font-size: 11px !important;
+  color: var(--text-muted) !important;
+}
+
+.cart-item-total-block {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.cart-item-total-price {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: var(--accent) !important;
+  font-family: monospace, sans-serif !important;
+}
+
+.cart-item-delete-btn {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 8px !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+  border: 1px solid rgba(239, 68, 68, 0.25) !important;
+  color: #F87171 !important;
+  display: grid !important;
+  place-items: center !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.cart-item-delete-btn:hover {
+  background: #EF4444 !important;
+  color: #FFFFFF !important;
+}
+
+.cart-item-tier-bottom {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-top: 6px !important;
+  border-top: 1px dashed var(--border-subtle) !important;
+  width: 100% !important;
+}
+
+.cart-item-qty-label {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: var(--text-muted) !important;
+}
+
+.cart-mini-stepper {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 8px !important;
+  padding: 2px 4px !important;
+}
+
+.cart-mini-stepper-btn {
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 6px !important;
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+  display: grid !important;
+  place-items: center !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.cart-mini-stepper-btn:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+.cart-mini-stepper-value {
+  font-size: 12.5px !important;
+  font-weight: 800 !important;
+  min-width: 22px !important;
+  text-align: center !important;
+  color: var(--text-main) !important;
+  font-family: monospace, sans-serif !important;
+}
+
+/* Bill Summary Box */
+.bill-summary-card-modern {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px !important;
+  padding: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+}
+
+.summary-row-item {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 13px !important;
+  color: var(--text-muted) !important;
+}
+
+.summary-row-item.total {
+  border-top: 1px solid var(--border-subtle) !important;
+  padding-top: 10px !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+}
+
+.summary-row-item.total .total-val {
+  color: var(--accent) !important;
+  font-size: 20px !important;
+}
+
+/* Modern Modals in Dark Theme */
+.synaptix-modal-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(10, 10, 18, 0.82) !important;
+  backdrop-filter: blur(8px) !important;
+  display: grid !important;
+  place-items: center !important;
+  z-index: 1000 !important;
+  padding: 20px !important;
+}
+
+.synaptix-modal-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(139, 92, 246, 0.25) !important;
+  width: 100% !important;
+  max-width: 540px !important;
+  overflow: hidden !important;
+  color: var(--text-main) !important;
+}
+
+/* ==========================================================================
+   ROOM & FOOD DESK SYNAPTIX OVERRIDES & POLISH
+   ========================================================================== */
+.synaptix-tab-pill-btn:hover {
+  border-color: var(--primary) !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .desk-input-field input,
+[data-theme="dark"] .desk-input-field select,
+[data-theme="dark"] .input-wrap input,
+[data-theme="dark"] .input-wrap select,
+[data-theme="dark"] .guest-lookup-bar input,
+[data-theme="dark"] .food-search-bar input {
+  background: transparent !important;
+  color: #F5F3FF !important;
+}
+
+[data-theme="dark"] .desk-input-field input::placeholder,
+[data-theme="dark"] .input-wrap input::placeholder,
+[data-theme="dark"] .guest-lookup-bar input::placeholder,
+[data-theme="dark"] .food-search-bar input::placeholder {
+  color: #64748B !important;
+}
+
+[data-theme="light"] .desk-input-field input,
+[data-theme="light"] .desk-input-field select,
+[data-theme="light"] .input-wrap input,
+[data-theme="light"] .input-wrap select,
+[data-theme="light"] .guest-lookup-bar input,
+[data-theme="light"] .food-search-bar input {
+  background: transparent !important;
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .desk-input-field input::placeholder,
+[data-theme="light"] .input-wrap input::placeholder,
+[data-theme="light"] .guest-lookup-bar input::placeholder,
+[data-theme="light"] .food-search-bar input::placeholder {
+  color: #94A3B8 !important;
+}
+
+/* Ensure native select options don't have white on white or dark on dark */
+[data-theme="dark"] select option {
+  background: #171525 !important;
+  color: #F5F3FF !important;
+}
+
+[data-theme="light"] select option {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+/* ==========================================================================
+   ROOM DESK: COMBINED FILTER SECTION (STATUS & ROOM TYPE)
+   ========================================================================== */
+section.room-filters-section,
+.room-filters-section {
+  display: block !important;
+  margin: 10px 0 16px 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.room-filters-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+}
+
+.room-filters-title-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+.room-filters-title {
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  color: var(--text-muted) !important;
+}
+
+.room-filters-reset-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 3px 10px !important;
+  border-radius: 9999px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  background: rgba(139, 92, 246, 0.15) !important;
+  color: #C084FC !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-theme="light"] .room-filters-reset-btn {
+  background: rgba(124, 58, 237, 0.1) !important;
+  color: #7C3AED !important;
+  border-color: rgba(124, 58, 237, 0.25) !important;
+}
+
+.room-filters-reset-btn:hover {
+  background: rgba(139, 92, 246, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+.room-filters-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 12px !important;
+}
+
+@media (max-width: 640px) {
+  .room-filters-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.room-filter-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+}
+
+.room-filter-label {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: var(--text-muted) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+.room-filter-input-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.room-filter-input-icon {
+  position: absolute !important;
+  left: 12px !important;
+  width: 15px !important;
+  height: 15px !important;
+  color: #A855F7 !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+.room-filter-select-input {
+  width: 100% !important;
+  padding: 8px 14px 8px 36px !important;
+  border-radius: 10px !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  appearance: auto !important;
+}
+
+[data-theme="dark"] .room-filter-select-input {
+  background: #171525 !important;
+  border: 1.5px solid rgba(139, 92, 246, 0.3) !important;
+  color: #F5F3FF !important;
+}
+
+[data-theme="dark"] .room-filter-select-input:hover {
+  border-color: #8B5CF6 !important;
+}
+
+[data-theme="dark"] .room-filter-select-input:focus {
+  border-color: #A855F7 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25) !important;
+}
+
+[data-theme="light"] .room-filter-select-input {
+  background: #FFFFFF !important;
+  border: 1.5px solid #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .room-filter-select-input:hover {
+  border-color: #7C3AED !important;
+}
+
+[data-theme="light"] .room-filter-select-input:focus {
+  border-color: #7C3AED !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2) !important;
+}
+
+/* ==========================================================================
+   ENTERPRISE RESPONSIVE SYSTEM (DESKTOP, LAPTOP, TABLET & MOBILE)
+   ========================================================================== */
+
+/* 1. Global Data Tables & Overflow Scroll Engine */
+.table-responsive,
+.history-table-wrapper,
+.modern-table-container,
+.synaptix-main-card > div[style*="overflowX"],
+.synaptix-main-card > div[style*="overflow-x"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  margin-bottom: 14px !important;
+}
+
+.table-responsive::-webkit-scrollbar,
+.history-table-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb,
+.history-table-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.32);
+  border-radius: 9999px;
+}
+
+.synaptix-data-table {
+  min-width: 660px !important;
+}
+
+/* 2. Executive Dashboard Responsive Grids */
+.dashboard-two-col-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 20px !important;
+  margin-top: 16px !important;
+}
+
+@media (max-width: 768px) {
+  .dashboard-two-col-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+}
+
+/* 3. Staff Relay Chat Responsive System */
+.staff-chat-grid-container {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+  margin-top: 10px;
+  min-height: 680px;
+}
+
+.staff-chat-channels-card,
+.staff-chat-thread-card {
+  padding: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .staff-chat-grid-container {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    gap: 16px !important;
+  }
+
+  .staff-chat-channels-card {
+    max-height: 280px !important;
+    overflow-y: auto !important;
+  }
+
+  .staff-chat-thread-card {
+    min-height: 520px !important;
+  }
+}
+
+/* 4. Floating Chat Messenger Responsive Popup */
+@media (max-width: 480px) {
+  .floating-chat-container {
+    bottom: 14px !important;
+    right: 14px !important;
+  }
+
+  .floating-chat-window {
+    width: calc(100vw - 20px) !important;
+    height: min(500px, calc(100vh - 80px)) !important;
+    border-radius: 16px !important;
+  }
+
+  .floating-chat-container {
+    bottom: 12px !important;
+    right: 12px !important;
+  }
+
+  .floating-chat-trigger-btn {
+    padding: 10px !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.6) !important;
+  }
+
+  .floating-chat-btn-label {
+    display: none !important;
+  }
+}
+
+/* 5. Food & Room Catalog Responsive Grids (Full-Width Clean Cards on Mobile) */
+@media (max-width: 1024px) {
+  .available-foods-grid-modern,
+  .available-rooms-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+    gap: 12px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .available-foods-grid-modern,
+  .available-rooms-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+  }
+
+  .dish-card-modern {
+    padding: 14px !important;
+    border-radius: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .room-card-modern,
+  .available-room-card {
+    padding: 14px 12px !important;
+    border-radius: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .room-card-top-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+  }
+
+  .room-card-middle-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+  }
+}
+
+/* 6. Filter Pills Carousel (Smooth Touch Scroll on Mobile) */
+@media (max-width: 768px) {
+  .room-type-filter-pills,
+  .food-category-pills,
+  .desk-tabs-bar,
+  .synaptix-tabs-switcher {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 6px !important;
+    scrollbar-width: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .room-type-filter-pills::-webkit-scrollbar,
+  .food-category-pills::-webkit-scrollbar,
+  .desk-tabs-bar::-webkit-scrollbar,
+  .synaptix-tabs-switcher::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .type-pill,
+  .desk-tab-btn,
+  .synaptix-tab-pill-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    font-size: 12px !important;
+    padding: 8px 14px !important;
+  }
+}
+
+/* 7. Unpin Sticky Right Section on Stacking */
+@media (max-width: 1180px) {
+  .desk-right-section {
+    position: static !important;
+    top: auto !important;
+    width: 100% !important;
+  }
+
+  .room-booking-layout,
+  .food-desk-main-layout {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* 8. Search Bars and Filter Toolbars */
+@media (max-width: 768px) {
+  .synaptix-toolbar-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 12px 14px !important;
+    gap: 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .synaptix-search-input-wrap,
+  .synaptix-search-box {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .rooms-catalog-toolbar {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+}
+
+/* 9. Page Containers & Header Scaling Across Breakpoints */
+@media (max-width: 1024px) {
+  .synaptix-dashboard-root,
+  .room-desk-container,
+  .food-desk-container,
+  .modern-page-container {
+    padding: 22px 20px 36px 20px !important;
+    gap: 18px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .synaptix-dashboard-root,
+  .room-desk-container,
+  .food-desk-container,
+  .modern-page-container {
+    padding: 14px 10px 70px 10px !important;
+    gap: 14px !important;
+  }
+
+  .synaptix-top-header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  .synaptix-welcome-text h1,
+  .welcome-title {
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+  }
+
+  .synaptix-welcome-text p,
+  .welcome-subtitle {
+    font-size: 12px !important;
+  }
+
+  .synaptix-actions-bar {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .synaptix-main-card {
+    padding: 14px 12px !important;
+    border-radius: 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .synaptix-dashboard-root,
+  .room-desk-container,
+  .food-desk-container,
+  .modern-page-container {
+    padding: 10px 8px 80px 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .synaptix-welcome-text h1,
+  .welcome-title {
+    font-size: 18px !important;
+  }
+
+  .dest-toggle-group-modern {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+
+  .synaptix-stat-card {
+    padding: 10px 12px !important;
+  }
+
+  .stat-main-number {
+    font-size: 20px !important;
+  }
+}
+
+/* 10. Modals and Overlays Touch-Scaling */
+@media (max-width: 600px) {
+  .modal-container,
+  .synaptix-modal-card {
+    width: calc(100vw - 20px) !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    border-radius: 16px !important;
+  }
+
+  .modal-header {
+    padding: 14px 16px !important;
+  }
+
+  .modal-form {
+    padding: 16px !important;
+  }
+}
+
+/* ==========================================================================
+   11. RESPONSIVE BILL CARDS & DESK TERMINALS (RoomDesk & FoodDesk)
+   ========================================================================== */
+.bill-summary-section-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.desk-left-section,
+.desk-right-section,
+.food-billing-section {
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.dates-form-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin-top: 12px !important;
+  margin-bottom: 14px !important;
+}
+
+@media (max-width: 640px) {
+  .dates-form-grid,
+  .guest-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+}
+
+.desk-summary-box {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px !important;
+  padding: 14px 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 14px 0 !important;
+}
+
+.desk-summary-line {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  font-size: 13px !important;
+  color: var(--text-muted) !important;
+  width: 100% !important;
+}
+
+.desk-summary-line strong {
+  color: var(--text-main) !important;
+  text-align: right !important;
+  word-break: break-word !important;
+}
+
+.desk-summary-divider {
+  height: 1px !important;
+  background: var(--border-subtle) !important;
+  margin: 4px 0 !important;
+  width: 100% !important;
+}
+
+.desk-summary-line.total-line {
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  color: var(--text-main) !important;
+}
+
+.desk-summary-total {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: var(--accent) !important;
+}
+
+/* Primary Booking / Billing Submit Button */
+.btn-submit-booking-pass {
+  width: 100% !important;
+  padding: 13px 18px !important;
+  border-radius: 12px !important;
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.45) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  line-height: 1.35 !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+.btn-submit-booking-pass:hover:not(:disabled) {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 22px rgba(139, 92, 246, 0.6) !important;
+}
+
+.btn-submit-booking-pass:disabled {
+  background: var(--bg-card-inner) !important;
+  color: var(--text-dim) !important;
+  border: 1px dashed var(--border-subtle) !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* FoodDesk Bill Summary & Ordering Section */
+.food-billing-section {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.bill-summary-card-modern {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px !important;
+  padding: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.summary-row-item {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  font-size: 13px !important;
+  color: var(--text-muted) !important;
+  width: 100% !important;
+}
+
+.summary-row-item.total {
+  border-top: 1px solid var(--border-subtle) !important;
+  padding-top: 10px !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+}
+
+.summary-row-item.total .total-val {
+  color: var(--accent) !important;
+  font-size: 20px !important;
+}
+
+.bill-modal-meta-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
+  margin-bottom: 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 600px) {
+  .dest-toggle-group-modern {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+
+  .bill-modal-meta-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-submit-booking-pass {
+    font-size: 12.5px !important;
+    padding: 11px 12px !important;
+    border-radius: 10px !important;
+  }
+
+  .desk-summary-box,
+  .bill-summary-card-modern {
+    padding: 12px 10px !important;
+    border-radius: 12px !important;
+  }
+
+  .desk-summary-total,
+  .summary-row-item.total .total-val {
+    font-size: 18px !important;
+  }
+}
+
+/* ==========================================================================
+   FOOD DESK: RESPONSIVE WORKFLOW, TABS & FLOATING TRAY BAR
+   ========================================================================== */
+.food-mobile-tabs-bar {
+  display: none !important;
+}
+
+.food-mobile-back-bar {
+  display: none !important;
+}
+
+.food-mobile-floating-bar {
+  display: none !important;
+}
+
+.food-catalog-section,
+.food-billing-section {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Tablet & Mobile Breakpoint (<= 1024px) */
+@media (max-width: 1024px) {
+  .food-desk-main-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .food-mobile-tabs-bar {
+    display: flex !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .food-mobile-tab-btn {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    border-radius: 12px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--text-muted) !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
+
+  .food-mobile-tab-btn:hover {
+    border-color: var(--primary) !important;
+    color: var(--text-main) !important;
+  }
+
+  .food-mobile-tab-btn.has-cart {
+    border-color: rgba(139, 92, 246, 0.6) !important;
+    background: rgba(139, 92, 246, 0.12) !important;
+    color: var(--text-main) !important;
+  }
+
+  .food-tab-count-pill {
+    padding: 2px 7px !important;
+    border-radius: 9999px !important;
+    background: var(--bg-card-inner) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--text-main) !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+  }
+
+  .food-tab-cart-pill {
+    padding: 2px 8px !important;
+    border-radius: 9999px !important;
+    background: #10B981 !important;
+    color: #FFFFFF !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5) !important;
+  }
+
+  .food-mobile-back-bar {
+    display: block !important;
+    margin-bottom: 12px !important;
+    width: 100% !important;
+  }
+
+  .btn-back-to-menu {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 8px 14px !important;
+    border-radius: 10px !important;
+    background: var(--bg-card-inner) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--primary) !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .btn-back-to-menu:hover {
+    background: var(--bg-card) !important;
+    border-color: var(--primary) !important;
+  }
+
+  /* Sticky Floating Cart Tray Bar on Mobile */
+  .food-mobile-floating-bar {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 16px !important;
+    left: 12px !important;
+    right: 12px !important;
+    z-index: 999 !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 11px 16px !important;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 10px 28px rgba(124, 58, 237, 0.45), 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    cursor: pointer !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  .floating-bar-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .floating-bar-cart-icon {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    display: grid !important;
+    place-items: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .floating-bar-text-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1px !important;
+  }
+
+  .floating-bar-count {
+    font-size: 11px !important;
+    opacity: 0.9 !important;
+    font-weight: 600 !important;
+  }
+
+  .floating-bar-amount {
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .floating-bar-action {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    padding: 6px 12px !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+/* Small Smartphone Breakpoint (<= 360px & ultra-narrow viewports) */
+@media (max-width: 360px) {
+  .food-mobile-tab-btn {
+    font-size: 11.5px !important;
+    padding: 8px 6px !important;
+    gap: 4px !important;
+  }
+
+  .food-mobile-tab-btn svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .dish-card-header-row {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  .dish-price-tag {
+    margin-left: auto !important;
+  }
+
+  .dish-card-modern {
+    padding: 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .dish-card-title {
+    font-size: 13.5px !important;
+  }
+
+  .dish-card-desc {
+    font-size: 11.5px !important;
+  }
+
+  .btn-dish-add-modern {
+    font-size: 12px !important;
+    padding: 9px 10px !important;
+  }
+
+  .cart-item-row-modern {
+    padding: 10px 10px !important;
+  }
+
+  .cart-item-tier-top {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+  }
+
+  .cart-item-total-block {
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   FOOD ORDERS & BILLS: MOBILE RESPONSIVE TICKET CARDS
+   ========================================================================== */
+.mobile-orders-cards-view {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-table-view {
+    display: none !important;
+  }
+
+  .mobile-orders-cards-view {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .mobile-order-ticket-card {
+    background: var(--bg-card-inner) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 14px !important;
+    padding: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .mobile-order-ticket-card:hover {
+    border-color: var(--primary) !important;
+  }
+
+  .order-ticket-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .order-ticket-id {
+    font-family: monospace, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    padding: 3px 8px !important;
+    border-radius: 6px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--accent) !important;
+  }
+
+  .order-ticket-table {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    padding: 3px 8px !important;
+    border-radius: 6px !important;
+    background: rgba(139, 92, 246, 0.12) !important;
+    color: var(--accent) !important;
+    border: 1px solid rgba(139, 92, 246, 0.25) !important;
+  }
+
+  .order-status-select {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 8px !important;
+    padding: 4px 8px !important;
+    color: var(--text-main) !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+  }
+
+  .order-ticket-items {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  .order-item-badge {
+    display: inline-block !important;
+    padding: 3px 8px !important;
+    border-radius: 6px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    font-size: 11.5px !important;
+    color: var(--text-main) !important;
+  }
+
+  .order-item-badge strong {
+    color: var(--accent) !important;
+    margin-right: 2px !important;
+  }
+
+  .order-ticket-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-top: 8px !important;
+    border-top: 1px dashed var(--border-subtle) !important;
+  }
+
+  .order-ticket-amount-group {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 6px !important;
+  }
+
+  .order-ticket-amount-label {
+    font-size: 11.5px !important;
+    color: var(--text-muted) !important;
+  }
+
+  .order-ticket-total {
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    color: var(--accent) !important;
+    font-family: monospace, sans-serif !important;
+  }
+
+  .order-ticket-cancel-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 4px 10px !important;
+    border-radius: 8px !important;
+    background: rgba(239, 68, 68, 0.1) !important;
+    border: 1px solid rgba(239, 68, 68, 0.25) !important;
+    color: #F87171 !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+  }
+}
+
+/* ==========================================================================
+   DINING MENU: MOBILE RESPONSIVE DISH CARDS
+   ========================================================================== */
+.mobile-dishes-cards-view {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-dishes-cards-view {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .mobile-dish-mgmt-card {
+    background: var(--bg-card-inner) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 14px !important;
+    padding: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  .dish-mgmt-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  .dish-mgmt-price-tag {
+    display: inline-flex !important;
+    align-items: baseline !important;
+    gap: 2px !important;
+    padding: 3px 8px !important;
+    border-radius: 8px !important;
+    background: rgba(139, 92, 246, 0.15) !important;
+    color: var(--accent) !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+    font-family: monospace, sans-serif !important;
+  }
+
+  .dish-mgmt-title {
+    margin: 2px 0 0 0 !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: var(--text-main) !important;
+    line-height: 1.35 !important;
+  }
+
+  .dish-mgmt-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-top: 8px !important;
+    border-top: 1px dashed var(--border-subtle) !important;
+    margin-top: 4px !important;
+  }
+
+  .dish-avail-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 4px 12px !important;
+    border-radius: 9999px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+  }
+
+  .dish-avail-pill.in-stock {
+    border: 1px solid rgba(52, 211, 153, 0.4) !important;
+    background: rgba(52, 211, 153, 0.12) !important;
+    color: #34D399 !important;
+  }
+
+  .dish-avail-pill.out-of-stock {
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
+    background: rgba(239, 68, 68, 0.12) !important;
+    color: #F87171 !important;
+  }
+
+  .dish-avail-pill .status-dot {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+  }
+
+  .dish-avail-pill.in-stock .status-dot {
+    background: #34D399 !important;
+  }
+
+  .dish-avail-pill.out-of-stock .status-dot {
+    background: #F87171 !important;
+  }
+}
+
+/* ==========================================================================
+   STAFF CHAT: MOBILE WORKFLOW & FULL RESPONSIVENESS
+   ========================================================================== */
+.staff-chat-mobile-tabs {
+  display: none !important;
+}
+
+.chat-back-to-channels-btn {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .staff-chat-mobile-tabs {
+    display: flex !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .chat-mobile-tab-btn {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    border-radius: 12px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--text-muted) !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+  }
+
+  .chat-mobile-tab-btn.active {
+    background: var(--primary-gradient) !important;
+    color: #FFFFFF !important;
+    border-color: transparent !important;
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4) !important;
+  }
+
+  .chat-tab-pill {
+    padding: 2px 7px !important;
+    border-radius: 9999px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: inherit !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+  }
+
+  .chat-back-to-channels-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 4px 10px !important;
+    border-radius: 8px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--primary) !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+  }
+
+  .chat-mobile-hide {
+    display: none !important;
+  }
+
+  .staff-chat-grid-container {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    gap: 0 !important;
+  }
+
+  .staff-chat-channels-card,
+  .staff-chat-thread-card {
+    height: 72vh !important;
+    min-height: 520px !important;
+    padding: 0 !important;
+  }
+
+  .staff-chat-thread-header {
+    padding: 10px 12px !important;
+    gap: 8px !important;
+  }
+
+  .staff-chat-quick-chips {
+    padding: 6px 10px !important;
+    gap: 6px !important;
+  }
+
+  .staff-chat-input-form {
+    padding: 10px 12px !important;
+    gap: 8px !important;
+  }
+
+  .staff-chat-input-field {
+    padding: 10px 14px !important;
+    font-size: 13px !important;
+    border-radius: 12px !important;
+  }
+
+  .staff-chat-send-btn {
+    padding: 10px 16px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .staff-chat-channels-card,
+  .staff-chat-thread-card {
+    height: 75vh !important;
+    min-height: 480px !important;
+    border-radius: 14px !important;
+    padding: 0 !important;
+  }
+
+  .chat-mobile-tab-btn {
+    font-size: 11.5px !important;
+    padding: 8px 8px !important;
+    gap: 4px !important;
+  }
+
+  .staff-chat-send-label {
+    display: none !important;
+  }
+
+  .staff-chat-send-btn {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 12px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .staff-chat-send-btn svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .staff-chat-input-form {
+    padding: 8px 8px !important;
+    gap: 6px !important;
+  }
+
+  .staff-chat-input-field {
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+    border-radius: 10px !important;
+  }
+
+  .staff-chat-send-btn {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    border-radius: 10px !important;
+  }
+
+  .staff-chat-send-btn svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+}
+
+/* ==========================================================================
+   ROOM DESK: TAB SWITCHER BALANCED ALIGNMENT (DESKTOP & MOBILE)
+   ========================================================================== */
+.room-desk-tabs-bar {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  margin-bottom: 24px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.room-desk-tab-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 12px 20px !important;
+  border-radius: 14px !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  background: var(--bg-card) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: none !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.room-desk-tab-btn:hover {
+  border-color: var(--primary) !important;
+  color: var(--text-main) !important;
+}
+
+.room-desk-tab-btn.active {
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.45) !important;
+}
+
+.room-desk-tab-btn .room-tab-badge-full {
+  display: inline-block !important;
+  padding: 2px 10px !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: inherit !important;
+  font-size: 11.5px !important;
+  font-weight: 800 !important;
+}
+
+.room-desk-tab-btn:not(.active) .room-tab-badge-full {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--accent) !important;
+}
+
+.room-desk-tab-btn .room-tab-badge-short {
+  display: none !important;
+  padding: 2px 7px !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: inherit !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+.room-desk-tab-btn:not(.active) .room-tab-badge-short {
+  background: var(--bg-card-inner) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--accent) !important;
+}
+
+.room-tab-text-short {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .room-desk-tabs-bar {
+    gap: 8px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .room-desk-tab-btn {
+    padding: 10px 8px !important;
+    font-size: 12.5px !important;
+    border-radius: 12px !important;
+    gap: 6px !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .room-tab-text-full,
+  .room-tab-badge-full {
+    display: none !important;
+  }
+
+  .room-tab-text-short,
+  .room-tab-badge-short {
+    display: inline-block !important;
+  }
+
+  .room-desk-tab-btn {
+    padding: 9px 4px !important;
+    font-size: 11.5px !important;
+    gap: 4px !important;
+  }
+}
+
+/* ==========================================================================
+   ROOMS CATALOG: MOBILE RESPONSIVE CARDS
+   ========================================================================== */
+.mobile-rooms-cards-view {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-rooms-cards-view {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .mobile-room-mgmt-card {
+    background: var(--bg-card-inner) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 14px !important;
+    padding: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .mobile-room-mgmt-card:hover {
+    border-color: var(--primary) !important;
+  }
+
+  .room-mgmt-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .room-mgmt-number-badge {
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    padding: 4px 10px !important;
+    background: var(--bg-card) !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--accent) !important;
+  }
+
+  .room-mgmt-card-meta {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+    padding-top: 6px !important;
+    border-top: 1px solid var(--border-subtle) !important;
+  }
+
+  .room-mgmt-card-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    padding-top: 6px !important;
+  }
+
+  .room-mgmt-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+    box-sizing: border-box !important;
+  }
+
+  .room-mgmt-btn.edit {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--text-main) !important;
+  }
+
+  .room-mgmt-btn.edit:hover {
+    border-color: var(--primary) !important;
+    color: var(--accent) !important;
+  }
+
+  .room-mgmt-btn.delete {
+    background: rgba(239, 68, 68, 0.1) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: #F87171 !important;
+  }
+
+  .room-mgmt-btn.delete:hover {
+    background: #EF4444 !important;
+    color: #FFFFFF !important;
+  }
+}
+
+/* ==========================================================================
+   GUEST BOOKINGS REGISTRY: MOBILE RESPONSIVE CARDS
+   ========================================================================== */
+.mobile-bookings-cards-view {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-bookings-cards-view {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .mobile-booking-mgmt-card {
+    background: var(--bg-card-inner) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 14px !important;
+    padding: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .mobile-booking-mgmt-card:hover {
+    border-color: var(--primary) !important;
+  }
+
+  .booking-mgmt-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .booking-mgmt-number-badge {
+    font-family: monospace !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--accent) !important;
+  }
+
+  .booking-mgmt-guest-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 6px 0 !important;
+  }
+
+  .booking-mgmt-dates-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    padding-top: 8px !important;
+    border-top: 1px solid var(--border-subtle) !important;
+  }
+}
+
+/* ==========================================================================
+   GUEST DIRECTORY & PROFILES: MOBILE RESPONSIVE CARDS
+   ========================================================================== */
+.mobile-guests-cards-view {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-guests-cards-view {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .mobile-guest-profile-card {
+    background: var(--bg-card-inner) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 14px !important;
+    padding: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .mobile-guest-profile-card:hover {
+    border-color: var(--primary) !important;
+  }
+
+  .guest-profile-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .guest-member-badge {
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+    font-family: monospace !important;
+    padding: 3px 8px !important;
+    background: var(--bg-card) !important;
+    border-radius: 6px !important;
+    border: 1px solid var(--border-subtle) !important;
+  }
+
+  .guest-profile-contact-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    padding: 4px 0 !important;
+  }
+
+  .guest-contact-touch-pill {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 6px 10px !important;
+    border-radius: 8px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--text-main) !important;
+    font-size: 12px !important;
+    text-decoration: none !important;
+    transition: all 0.15s ease !important;
+  }
+
+  .guest-contact-touch-pill:hover {
+    border-color: var(--primary) !important;
+    color: var(--accent) !important;
+  }
+
+  .guest-profile-card-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    padding-top: 8px !important;
+    border-top: 1px solid var(--border-subtle) !important;
+  }
+
+  .guest-mgmt-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    padding: 6px 12px !important;
+    border-radius: 8px !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+    box-sizing: border-box !important;
+  }
+
+  .guest-mgmt-btn.edit {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--text-main) !important;
+  }
+
+  .guest-mgmt-btn.edit:hover {
+    border-color: var(--primary) !important;
+    color: var(--accent) !important;
+  }
+
+  .guest-mgmt-btn.delete {
+    background: rgba(239, 68, 68, 0.1) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: #F87171 !important;
+  }
+
+  .guest-mgmt-btn.delete:hover {
+    background: #EF4444 !important;
+    color: #FFFFFF !important;
+  }
+}
+
+/* ==========================================================================
+   ADMIN DASHBOARD: COMPACT DESK ACTIONS BAR & BUTTONS
+   ========================================================================== */
+.dash-desk-actions-bar {
+  margin-top: 14px !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.dash-action-btn-primary,
+.dash-action-btn-secondary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 8px 12px !important;
+  border-radius: 10px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+  min-height: 38px !important;
+  height: 38px !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+.dash-action-btn-primary {
+  background: var(--primary-gradient) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.35) !important;
+}
+
+.dash-action-btn-primary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.5) !important;
+}
+
+.dash-action-btn-secondary {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--accent) !important;
+}
+
+.dash-action-btn-secondary:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--primary) !important;
+  color: var(--text-main) !important;
+}
+
+@media (max-width: 480px) {
+  .dash-action-btn-primary,
+  .dash-action-btn-secondary {
+    padding: 6px 6px !important;
+    font-size: 11px !important;
+    gap: 4px !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    border-radius: 8px !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE VIEW: CARDS EXTRA MARGIN & BREATHING ROOM
+   ========================================================================== */
+@media (max-width: 768px) {
+  .synaptix-dashboard-root,
+  .room-desk-container,
+  .food-desk-container,
+  .modern-page-container {
+    padding: 14px 12px 80px 12px !important;
+    gap: 16px !important;
+  }
+
+  .synaptix-main-card {
+    margin-bottom: 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .dashboard-two-col-grid {
+    gap: 16px !important;
+  }
+
+  .mobile-rooms-cards-view,
+  .mobile-bookings-cards-view,
+  .mobile-guests-cards-view,
+  .mobile-orders-cards-view,
+  .mobile-dishes-cards-view {
+    gap: 14px !important;
+  }
+
+  .mobile-room-mgmt-card,
+  .mobile-booking-mgmt-card,
+  .mobile-guest-profile-card,
+  .mobile-order-ticket-card,
+  .mobile-dish-mgmt-card {
+    margin-bottom: 2px !important;
+  }
+
+  .synaptix-stat-card {
+    margin-bottom: 4px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .synaptix-dashboard-root,
+  .room-desk-container,
+  .food-desk-container,
+  .modern-page-container {
+    padding: 12px 10px 85px 10px !important;
+  }
+
+  .synaptix-main-card {
+    margin-bottom: 14px !important;
+    padding: 14px 12px !important;
+  }
+
+  .dashboard-two-col-grid {
+    gap: 14px !important;
+  }
+
+  .mobile-rooms-cards-view,
+  .mobile-bookings-cards-view,
+  .mobile-guests-cards-view,
+  .mobile-orders-cards-view,
+  .mobile-dishes-cards-view {
+    gap: 12px !important;
+  }
+}
+
+/* ==========================================================================
+   NAVBAR PROFILE AVATAR: SEAMLESS FIT & BORDER ADJUSTMENT
+   ========================================================================== */
+@media (max-width: 768px) {
+  .navbar-profile-trigger {
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 50% !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .navbar-profile-trigger .avatar-container {
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  .navbar-profile-trigger .user-avatar-wrapper {
+    width: 32px !important;
+    height: 32px !important;
+    border: 1.5px solid rgba(139, 92, 246, 0.5) !important;
+    box-shadow: 0 1px 4px rgba(139, 92, 246, 0.25) !important;
+    box-sizing: border-box !important;
+  }
+
+  .navbar-profile-trigger .user-avatar-wrapper svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-profile-trigger,
+  .navbar-profile-trigger .avatar-container,
+  .navbar-profile-trigger .user-avatar-wrapper {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar-profile-trigger,
+  .navbar-profile-trigger .avatar-container,
+  .navbar-profile-trigger .user-avatar-wrapper {
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
+  }
+}
+
+
+
+
+
+
